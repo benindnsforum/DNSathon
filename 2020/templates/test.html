@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DNSathon - Protège vos noms de domaine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+
+    <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/static/css/aos.css">
+
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/static/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/static/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="/static/css/flaticon.css">
+    <link rel="stylesheet" href="/static/css/icomoon.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/HoldOn.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img src="/static/images/full_logo_benindns.png" class="img-fluid " alt="" style="max-width: 110px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+          </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <!--<li class="nav-item "><a href="/" class="nav-link">Accueil</a></li>
+                    <li class="nav-item active"><a href="/audit" class="nav-link ">test</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Documentation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="ftco-domain pt-5" style="height: 600px;">
+        <div class="container pt-5">
+            <div class="row d-flex pt-5 " style="margin-top: 50px;">
+                <div class="col-lg-12 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
+                    <h2 class="text-center mb-3">Entrez votre nom de domaine</h2>
+                    <p class="text-center mb-5">Pour réaliser des mesures sur le Système des Noms de Domaines, de l’internet et de réaliser l'audit de l'infrastructure DNS</p>
+                </div>
+
+                <div class="col-lg-12 ftco-wrap ftco-animate" style="margin-left: 60px;">
+                    <form class="domain-form d-flex" id="form">
+                        <div class="form-group domain-name">
+                            <input type="text" class="form-control name px-4" placeholder="Entrer votre nom de domaine..." id="dnsname" name="dnsname">
+                        </div>
+                        <div class="form-group domain-select d-flex">
+                            <input class="search-domain btn btn-primary text-center" value="Tester" onclick="tester()">
+                        </div>
+                    </form>
+                </div>
+                <div id="message" style="text-align: center;margin: auto;margin-top: 10px;"></div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ftco-section bg-light" style="display: none;" id="answ">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <h2 class="mb-4">Résultats de votre Test</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div id="accordion">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#menuone" aria-expanded="true" aria-controls="menuone">
+												Informations générales
+												<span class="collapsed">
+													<i class="icon-plus-circle"></i>
+												</span>
+													<div id="menuone" class="collapse">
+                                                        <div class="card-body">
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 ftco-animate infos">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+												<span class="expanded">
+													<i class="icon-minus-circle"></i>
+												</span>
+											</a>
+                                    </div>
+
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#menutwo" aria-expanded="false" aria-controls="menutwo">Résilience <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+                                    </div>
+                                    <div id="menutwo" class="collapse">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 ftco-animate resiliance" style="font-size: 20px;color: black">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#menu3" aria-expanded="false" aria-controls="menu3">Performance <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+                                    </div>
+                                    <div id="menu3" class="collapse">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 ftco-animate performance" style="font-size: 20px;color: black">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#menu4" aria-expanded="false" aria-controls="menu4">Sécurité <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+                                    </div>
+                                    <div id="menu4" class="collapse">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 ftco-animate securite" style="font-size: 20px;color: black">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-12 text-center">
+                    <h2 class="text-light">DNSathon 2020</h2>
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright DNSathon &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        </a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.easing.1.3.js"></script>
+    <script src="/static/js/jquery.waypoints.min.js"></script>
+    <script src="/static/js/jquery.stellar.min.js"></script>
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/jquery.magnific-popup.min.js"></script>
+    <script src="/static/js/aos.js"></script>
+    <script src="/static/js/jquery.animateNumber.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker.js"></script>
+    <script src="/static/js/jquery.timepicker.min.js"></script>
+    <script src="/static/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="/static/js/google-map.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/HoldOn.min.js"></script>
+    <script type="text/javascript">
+        function show() {
+            document.getElementById('answ').style.display = '';
+        }
+
+        function tester() {
+
+            
+            $('#message').removeClass();
+            $('#message').hide();
+            document.getElementById('answ').style.display = 'none';
+
+            var audit = "/api/audit/";
+            console.log(audit);
+
+            var dns = document.getElementById('dnsname').value;
+            var result = audit + dns;
+            console.log(result);
+
+            var myHeaders = new Headers();
+
+            var myInit = {
+                method: 'GET',
+                headers: myHeaders,
+                mode: 'cors',
+                cache: 'default'
+            }
+            ;
+
+            HoldOn.open({
+                 theme:"sk-circle",
+                 message: "Patienter pendant les tests",
+                 // backgroundColor:"#1847B1",
+                 // textColor:"white"
+            });
+
+            $.ajax({
+                url: result,
+                dataType: 'json',
+                contentType: "application/json",
+                success: function(data){
+                   HoldOn.close()
+                    if (data.EXIST == true){
+                        $('#message').addClass("alert alert-success");
+                        $('#message').html('Le nom de domaine existe');
+                        $('#message').show();
+
+                        $('.infos').html(`
+                        <p>IPV6 : ${ data.INFO_IPV6 ==  true ? "Activé" : "Non activité." }</p>
+                        <p>MX (serveur mail) : ${ data.INFO_MX.exist ==  true ? "Disponible" : "Non disponible." }</p>
+                        <p>SOA : ${ data.INFO_SOA ==  true ? "Disponible" : "Non disponible." }</p>
+                        <p>NS :
+                            <ul>
+                                <li>Nombre: ${data.INFO_NS.number}</li>
+                                <li>List: ${data.INFO_NS.list.toString()}</li>
+                            </ul>
+                        </p>
+                    `)
+                        $('.resiliance').html(`
+                            <p>NS:
+                                <ul>
+                                    <li>Nombre: ${data.INFO_NS.number >= 2 ? "Félicitations! Vous avez 2 ou plusieurs NS" : "Attention! Vous n'avez qu'un NS" }</li>
+
+                                    <li>${data.INFO_NS.same_asn == false && data.INFO_NS.number >= 2 ? "ASN: Félicitations! Vos NS ne sont pas dans le même ASN" : (data.INFO_NS.same_asn == true && data.INFO_NS.number >= 2 ? "Attention! Vos NS sont dans le même ASN" : "RAS") }</li>
+                                </ul>
+                            </p>
+                        `)
+
+                        $('.performance').html(`
+                            <p>Temps de reponse: ${data.PERFORMANCE_DNSTIME}</p>
+                            <p>EDNS: ${data.PERFORMANCE_EDNS == true ? "Disponible" : "Non disponible"}</p>
+                        `)
+
+                        $('.securite').html(`
+                            <p>DNSSEC: ${data.SEC_DNSSEC.exist == true && data.SEC_DNSSEC.ds == true ? "Activé" : "Non activé"}</p>
+                            <p>DNSKEY: ${data.SEC_DNSSEC.dns_key == true ? "Trouvé" : "Non trouvé"}</p>
+                            <p>DS: ${data.SEC_DNSSEC.ds == true ? "Trouvé" : "Non trouvé"}</p>
+                            <p>SSL: ${data.SEC_SSL == true ? "Activé" : "Non activé"}</p>
+                        `)
+                    show()
+                    }else{
+                        $('#message').addClass("alert alert-danger");
+                        $('#message').html('Le nom de domaine n\'existe pas');
+                        $('#message').show();
+                    }
+
+                    console.log(data)
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+
+            /*var request = new XMLHttpRequest();
+
+            var audit = "http://192.168.12.81:5555/api/audit/";
+            var dns = document.getElementById('dnsname').value;
+            var result = audit + dns;
+            console.log(result);
+
+            request.open('GET', result, true);
+
+            request.onload = function() {
+
+
+
+                var data = JSON.parse(this.response)
+
+                if (request.status >= 200 && request.status < 400) {
+                    data.forEach((movie) => {
+                        console.log(movie.title)
+                    })
+                } else {
+                    console.log('error')
+                }*/
+        }
+    </script>
+
+</body>
+
+</html>

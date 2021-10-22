@@ -105,10 +105,10 @@ dig SOA . @10.10.40.5 +dnssec
 ```
 
 ## References
-[Setup your own DNS resolver using Bind9](https://www.perfacilis.com/blog/systeembeheer/linux/setup-a-public-dns-server.html)
-[Current Root Trust Anchors](https://www.isc.org/bind-keys/)
-[bind9 - DNSSEC Guide](https://bind9.readthedocs.io/en/latest/dnssec-guide.html)
-[DNSSEC Guide : Chapter 3. Validation - Trust Anchors](https://dnsinstitute.com/documentation/dnssec-guide/ch03s04.html)
+- [Setup your own DNS resolver using Bind9](https://www.perfacilis.com/blog/systeembeheer/linux/setup-a-public-dns-server.html)
+- [Current Root Trust Anchors](https://www.isc.org/bind-keys/)
+- [bind9 - DNSSEC Guide](https://bind9.readthedocs.io/en/latest/dnssec-guide.html)
+- [DNSSEC Guide : Chapter 3. Validation - Trust Anchors](https://dnsinstitute.com/documentation/dnssec-guide/ch03s04.html)
 
 ## Conclusion
 

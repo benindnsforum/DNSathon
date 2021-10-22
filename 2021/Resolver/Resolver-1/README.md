@@ -6,8 +6,8 @@ Mis en place d'un **resolver** avec **bind9**
 S'assurer que le DNSSEC est active et fontionne correctement apres que le server *racine* l'active
 
 ## Outils
-- [bind9]()
-- [dig]()
+- [bind9](https://www.isc.org/bind/)
+- [dig](https://packages.debian.org/buster/dnsutils)
 
 ## Installation et Configurations
 
@@ -103,6 +103,12 @@ Verifier du DNSSEC: Confirmer que le flag **ad** est present dans la reponse de 
 # "10.10.40.5" est l'adresse du resolver
 dig SOA . @10.10.40.5 +dnssec
 ```
+
+## References
+[Setup your own DNS resolver using Bind9](https://www.perfacilis.com/blog/systeembeheer/linux/setup-a-public-dns-server.html)
+[Current Root Trust Anchors](https://www.isc.org/bind-keys/)
+[bind9 - DNSSEC Guide](https://bind9.readthedocs.io/en/latest/dnssec-guide.html)
+[DNSSEC Guide : Chapter 3. Validation - Trust Anchors](https://dnsinstitute.com/documentation/dnssec-guide/ch03s04.html)
 
 ## Conclusion
 

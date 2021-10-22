@@ -18,14 +18,16 @@ Ajouter dans le fichier `/etc/bind/named.config.local` la zone root:
 ```
 zone "." {
     type master;
-    file "/etc/bind/db.root"
+    file "/etc/bind/zones/root/db.root"
 }
 ```
 
-Creer dans le fichier `db.root` dans `/etc/bind`:
-`sudo touch /etc/bind/db.root`.
+Créer dans le fichier `db.root` dans `/etc/bind/zones/root/`:
+`sudo touch /etc/bind/zones/root/db.root`.
 
-Editer le fichier `/etc/bind/db.root` en ajoutant les configs suivante:
+**NB: Créer les dossiers zones et root**
+
+Éditer le fichier `/etc/bind/zones/root/db.root` en ajoutant les configs suivante:
 
 ```
 ;
@@ -66,7 +68,7 @@ zone "." {
 } 
 ```
 
-Creer le fichier `/etc/bind/root.hints` et ajouter le contenu suivant:
+Créer le fichier `/etc/bind/root.hints` et ajouter le contenu suivant:
 
 ```
 .                    360      NS    ns1.root.
@@ -85,10 +87,10 @@ zone "10.10.10.in-addr.arpa" {
 };
 ```
 
-Creer dans le fichier `db.10.10.10` dans `/etc/bind`:
+Créer dans le fichier `db.10.10.10` dans `/etc/bind`:
 `sudo touch /etc/bind/db.10.10.10`.
 
-Editer le fichier `/etc/bind/db.10.10.10` en ajoutant les configs suivante:
+Éditer le fichier `/etc/bind/db.10.10.10` en ajoutant les configs suivante:
 
 ```
 ;
@@ -109,8 +111,8 @@ $TTL    600
 ```
 
 ### 5 - Configurer la synchronisation avec le serveur root 2 ###
-Génerer la clé en tapant la commande: <br>
-`dnssec-keygen -a HMAC-MD5 -b 128 -n HOST .`
+Générer la clé en tapant la commande: <br>
+`dnssec-keygen -a HMAC-SHA256 -b 128 -n HOST .`
 
 Après l'éxécution de la commande ci-dessus, on a eu les fichiers: <br>
 `K.+157+11684.key` et `K.+157+11684.private`
@@ -121,12 +123,12 @@ Ajouter ensuite dans le fichier `named.conf.local` la config suivante:
 
 ```
 key "." {
-	algorithm hmac-md5;
+	algorithm hmac-sha256;
 	secret "CLE";
 };
 ```
 
-Modifer ensuite les zone **.** et **10.10.10.in-addr.arpa** de la manière suivante:
+Modifier ensuite les zone **.** et **10.10.10.in-addr.arpa** de la manière suivante:
 
 ```
 zone "." {
@@ -149,7 +151,7 @@ zone "10.10.10.in-addr.arpa" {
 
 ### 6 - Configurations des options et activation de dnssec ###
 
-Creer le fichier `/etc/bind/named.conf.options` et ajouter les configuations suivantes:
+Créer le fichier `/etc/bind/named.conf.options` et ajouter les configurations suivantes:
 
 
 ```
@@ -159,10 +161,6 @@ options {
 	dnssec-enable yes;
 
 	listen-on-v6 { any; };
-	forwarders {
-		10.10.10.1;
-	};
-	forward only;
 	listen-on {127.0.0.1; 10.10.10.5; };
 	auth-nxdomain no ;
 	version none;
@@ -170,6 +168,46 @@ options {
 };
 
 ```
+
+Créer le dossier `keys` dans `/etc/bind`.
+
+Saisir ensuite les commandes suivantes pour gérer la clé `KSK` et la clé `ZSK`
+
+```
+cd /etc/bind/keys
+dnssec-keygen -a RSASHA256 -b 2048 -n ZONE . # pour le ZSK
+dnssec-keygen -f KSK -a RSASHA256 -b 4096 -n ZONE .
+```
+
+Modifier ensuite la zone **.** pour la signature DNSSEC
+
+```
+zone "." {
+    type master;
+    file "/etc/bind/db.root";
+	allow-transfer { key "."; 10.10.10.10;};
+	allow-update { key "." ; };
+	
+	# look for dnssec keys here:
+    key-directory "/etc/bind/keys";
+    
+    # publish and activate dnssec keys:
+    auto-dnssec maintain;
+    
+    # use inline signing:
+    inline-signing yes;
+};
+```
+
+Réinitialiser les configurations du serveur en saisissant la commande:
+
+`rndc reconfig`
+
+Pour vérifier que le DNSSEC est bien activé exécuter la commande suivante:
+
+`dig @10.10.10.5 SOA . +dnssec`
+
+Si dans les records, vous avez le `RRSIG (RRset Signature)` c'est OK.  
 
 ### 7 - Tester les configurations ###
 
@@ -191,7 +229,7 @@ nameserver 10.10.40.10
 ```
 et exécuter la commande `sudo systemctl restart bind9`.
 
-### 10- Configurer le TLD ###
+### 10- Configurer les TLD ###
 
 Modifier le fichier zone du seveur root pour déclarer les TLD .cotonou et .benin
 

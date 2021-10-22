@@ -3,6 +3,8 @@
 
 Mis en place d'un **resolver** avec **bind9**
 
+S'assurer que le DNSSEC est active et fontionne correctement apres que le server *racine* l'active
+
 ## Outils
 - [bind9]()
 - [dig]()
@@ -54,13 +56,29 @@ Mis en place d'un **resolver** avec **bind9**
   S'assurez vous que le server **racine** a activer le **DNSSEC**.
 
   ```basic
-  dnssec-enable yes;
-  dnssec-validation auto;
+  dnssec-validation yes;
   ```
 
-  
+- Recuperer la clés DNS depuis le root avec la commande (la clé **257 3 8**)
 
-- Redemarrer la machine
+  ```bash
+  dig DNSKEY @10.10.10.5 .
+  ```
+
+- Ajouter le record **trusted-keys** dans **named.conf**
+
+  ```basic
+  trusted-keys {
+      . 257 3 8 "DNSKEY";
+  };
+  ```
+
+- Redemarrer le service **bind9**
+
+  ```bash
+  sudo service bind9 restart
+  sudo service bind9 status
+  ```
 
 ## Tests
 
@@ -74,8 +92,16 @@ dig ns .
 ​	Verifier que le *resolver* arrive a resoudre des requetes ver le server *registre*
 
 ```bash
-dig cotonou. @10.10.20.5  # "10.10.20.5" est l'adresse du registre du TLD ".cotonou"
-dig benin. @10.10.20.10  # "10.10.20.10" est l'adresse du registre du TLD ".benin"
+# "10.10.40.5" est l'adresse du resolver
+dig cotonou. @10.10.40.5
+dig benin. @10.10.40.5
+```
+
+Verifier du DNSSEC: Confirmer que le flag **ad** est present dans la reponse de la requete ci-dessous
+
+```bash
+# "10.10.40.5" est l'adresse du resolver
+dig SOA . @10.10.40.5 +dnssec
 ```
 
 ## Conclusion

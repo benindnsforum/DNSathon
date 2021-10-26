@@ -1,6 +1,9 @@
 # DNSathon
 Hackathon activity as part of Benin DNS Forum
 
+## 2021 Edition ##
+The results of the hackathon are available [here](2021)
+
 ## 2018 Edition ##
 The results of the hackathon are available [here](2018)
 
@@ -10,4 +13,4 @@ The results of the hackathon are available [here](2017)
 ## Licence ##
 MIT License
 
-Copyright (c) 2017,2018 Alfred Arouna
+Copyright (c) 2017,2021 Alfred Arouna

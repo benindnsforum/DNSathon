@@ -1,4 +1,8 @@
 # Registrar
+## Objectif
+Mettre en place un service d’enregistrement des noms de domaines pour les TLD .cotonou et .benin grâce à une interface web d’enregistrement et/ou une API.
+Le groupe mettra également en place les serveurs NS qui feront autorité sur les domaines enregistrés et mettra en place un service à valeur ajoutée d’hébergement mutualisé.
+
 
 ## Outils
 * bind9
@@ -102,12 +106,12 @@ Apres ces configurations editer le fichier `/etc/bind/named.conf.options` comme 
 ```
 options {
 	directory "/var/cache/bind";
-  dnssec-validation auto;
+  	dnssec-validation auto;
 	allow-recursion { any; }
 
 	auth-nxdomain no;    # conform to RFC1035
 	listen-on { any; };
-  listen-on-v6 { any; };
+  	listen-on-v6 { any; };
 };
 ```
 Redemarrer les services `bind`
@@ -127,6 +131,7 @@ L'appliction Web a ete realiser avec les technologies suivantes :
 * CSS
 * PHP
 * JS
+
 Copier le dossier dans le repertoire `/var/www/html/`
 
 ## 6 - Configuration du serveur Mysql
@@ -154,7 +159,6 @@ systemctl restart mysql apache2
 
 
 ## Realisation
-Realiser par : 
 * [Ronel KPOSSOU](https://github.com/th3f0r3ign3r)
 * [Tino Anago](https://github.com/tinosmargue)
 * [Ulrich SEGLA](https://github.com/alges22)

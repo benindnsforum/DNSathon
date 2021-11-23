@@ -1,2 +1,3 @@
-# dns_tld_benin_api
+# DNS tld benin api
+A very small API that handle basic feature related to a Registy.
 

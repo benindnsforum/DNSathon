@@ -21,35 +21,36 @@ Mise en place du **Resolver** DNS avec implémentation du **DoH**
 - Editer le fichier **/etc/unbound/unbound.conf**
 
   ```bash
-        server:
-       interface: 10.10.40.10
-       interface: ::0
-       access-control: 0.0.0.0/0 allow
-       access-control: ::/0 allow
-       root-hints: "/var/lib/unbound/root.hints"
-       verbosity: 0
-       qname-minimisation: yes
+    server:
+    interface: 10.10.40.10
+    interface: ::0
+    access-control: 0.0.0.0/0 allow
+    access-control: ::/0 allow
+    root-hints: "/var/lib/unbound/root.hints"
+    verbosity: 0
+    qname-minimisation: yes
+    val-log-level: 2
 
-      #Puissance de l'utilisation du proceseur
-       num-threads: 2
-       msg-cache-slabs: 4
-       rrset-cache-slabs: 4
-       infra-cache-slabs: 4
-       key-cache-slabs: 4
+    #Puissance de l'utilisation du proceseur
+    num-threads: 2
+    msg-cache-slabs: 4
+    rrset-cache-slabs: 4
+    infra-cache-slabs: 4
+    key-cache-slabs: 4
 
-      #augmentation memoire cache  
-       rrset-cache-size: 100m
-       msg-cache-size: 50m
+    #augmentation memoire cache  
+    rrset-cache-size: 100m
+    msg-cache-size: 50m
 
-      #plage sortante 
-       outgoing-range: 465
-       so-rcvbuf: 4m
-       so-sndbuf: 4m
-       port: 53
-       do-ip4: yes
-       do-ip6: yes
-       do-udp: yes
-       do-tcp: yes
+    #plage sortante 
+    outgoing-range: 465
+    so-rcvbuf: 4m
+    so-sndbuf: 4m
+    port: 53
+    do-ip4: yes
+    do-ip6: yes
+    do-udp: yes
+    do-tcp: yes
  ```
 
  - Telechager le fichier **root.hints** depuis le server racine
@@ -95,7 +96,7 @@ dig ns .
 ```bash
 # "10.10.40.10" est l'adresse du resolver
 dig cotonou. @10.10.40.10
-dig benin. @10.10.40.10
+dig ouedo. @10.10.40.10
 ```
 
 

@@ -56,7 +56,8 @@ S'assurer que le DNSSEC est active et fontionne correctement apres que le server
   S'assurez vous que le server **racine** a activer le **DNSSEC**.
 
   ```basic
-  dnssec-validation yes;
+    dnssec-validation auto;
+    bindkeys-file "/etc/bind/bind.keys";
   ```
 
 - Recuperer la clés DNS depuis le root avec la commande (la clé **257 3 8**)
@@ -68,8 +69,8 @@ S'assurer que le DNSSEC est active et fontionne correctement apres que le server
 - Ajouter le record **trusted-keys** dans **named.conf**
 
   ```basic
-  trusted-keys {
-      . 257 3 8 "DNSKEY";
+  trust-anchors {
+      . initial-key 257 3 8 "DNSKEY";
   };
   ```
 

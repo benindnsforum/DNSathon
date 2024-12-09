@@ -22,12 +22,12 @@ zone "." {
 }
 ```
 
-Créer dans le fichier `db.root` dans `/etc/bind/zones/root/`:
-`sudo touch /etc/bind/zones/root/db.root`.
+Créer dans le fichier `db.root` dans `/var/lib/bind/`:
+`sudo touch /var/lib/bind/db.root`.
 
 **NB: Créer les dossiers zones et root**
 
-Éditer le fichier `/etc/bind/zones/root/db.root` en ajoutant les configs suivante:
+Éditer le fichier `/var/lib/bind/db.root` en ajoutant les configs suivante:
 
 ```
 ;
@@ -135,7 +135,7 @@ Modifier ensuite les zone **.** et **10.10.10.in-addr.arpa** de la manière suiv
 ```
 zone "." {
     type master;
-    file "/etc/bind/zones/root/db.root";
+    file "/var/lib/bind/db.root";
 	allow-transfer { key "."; 10.10.10.10;};
 	allow-update { key "." ; };
 };
@@ -186,7 +186,7 @@ Modifier ensuite la zone **.** pour la signature DNSSEC
 ```
 zone "." {
     type master;
-    file "/etc/bind/zones/root/db.root";
+    file "/var/lib/bind/db.root";
 	allow-transfer { key "."; 10.10.10.10;};
 	allow-update { key "." ; };
 	
@@ -257,3 +257,4 @@ ns1.pdns.cotonou.   IN A    10.10.20.5
 
 
 **NB: A chaque modification d'un fichier de zone il faut incrémenter le Serial dans le SOA.**
+

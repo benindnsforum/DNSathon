@@ -1,0 +1,10 @@
+test.local.	A
+google.com	A
+openai.com	A
+wikipedia.org	A
+amazon.com	A
+test.local.     MX
+google.com      MX
+openai.com      MX
+wikipedia.org   MX
+amazon.com      MX
